@@ -1,5 +1,5 @@
 output:PA9-logandihel-zaneyoung.o SplashScreen.o stdafx.o SVGParser.o Car.o Game.o LocalPlayer.o Menu.o Player.o RigidBody2.o Scene.o
-	g++ PA9-logandihel-zaneyoung.o Car.o Game.o LocalPlayer.o Menu.o Player.o RigidBody2.o Scene.o SplashScreen.o stdafx.o SVGParser.o -o Nitro -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+	g++ PA9-logandihel-zaneyoung.o Car.o Game.o LocalPlayer.o Menu.o Player.o RigidBody2.o Scene.o SplashScreen.o stdafx.o SVGParser.o -o Nitro -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
 PA9-logandihel-zaneyoung.o:	PA9-logandihel-zaneyoung.cpp SplashScene.h testing.h Button.h MenuScene.h numPlayerSelectScene.h PauseMenu.h  PlayScene.h CarPickerScene.h CarSelectScene.h map.h MapParser.h
 	g++ -c PA9-logandihel-zaneyoung.cpp

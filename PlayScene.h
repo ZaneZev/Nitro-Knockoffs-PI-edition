@@ -35,7 +35,7 @@ public:
 			switch (i)
 			{
 			case 0:
-				localPlayers.push_back(new LocalPlayer(theMap->startBox->getPosition()+((float)i*offset), carPaths[i], "wasd", "P1"));
+				localPlayers.push_back(new LocalPlayer(theMap->startBox->getPosition()+((float)i*offset), carPaths[i], "cbda", "P1"));
 				break;
 			case 1:
 				localPlayers.push_back(new LocalPlayer(theMap->startBox->getPosition()+ ((float)i*offset), carPaths[i], "ijkl", "P2"));
@@ -66,7 +66,7 @@ public:
 
 		bestScoreTime = 1E6; // bad time
 		float server_hs = 1E6;
-/*
+
 		try {
 			server_hs = sm.getHighscore();
 		}
@@ -74,7 +74,7 @@ public:
 			// could not read file
 			cout << "could not get highscore from server: " << endl;
 		}
-*/
+
 
 
 		try {
@@ -101,12 +101,12 @@ public:
 
 		raceDone = false;
 		this->theMap = theMap;
-
+		/*
 		music = new sf::Music();
 		if (music->openFromFile("./songs/blockrunner.wav")) {
 			music->play();
 		}
-		
+		*/
 		for (Player * p : localPlayers) {
 			p->nextCheckpoint = theMap->pStart;
 			players.push_back(p);
@@ -224,7 +224,7 @@ public:
 		else if (state == EXIT) {
 			// save high score
 			if (raceDone) {
-/*
+
 				try {
 					float besttimeever = seconds < bestScoreTime ? seconds : bestScoreTime;
 					sm.sendHighscore(besttimeever);
@@ -232,13 +232,13 @@ public:
 				catch (std::exception &e) {
 					cout << "could not send the best time ever to the server" << endl;
 				}
-*/
+
 				if (seconds < bestScoreTime) {
 					// new high score
 					try {
 						outfile.open("bestscore.txt");
 						char buffer[8];
-						snprintf(buffer, 8, "%3.3f", seconds);
+						//snprintf(buffer, 8, "%3.3f", seconds);
 						outfile.write(buffer, strlen(buffer));
 					}
 					catch (std::exception &e) {
@@ -364,5 +364,5 @@ private:
 	ifstream infile;
 	ofstream outfile;
 
-	//SocketManager sm;
+	SocketManager sm;
 };

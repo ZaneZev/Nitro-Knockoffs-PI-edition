@@ -23,7 +23,11 @@ public:
 			text->setRotation(-fCount / 45.f * 360.f);
 		}
 		if (fCount == (30*3)) {
-			CurrentScene = new MenuScene;
+			//CurrentScene = new MenuScene;
+			vector<string> carpath;
+			carpath.push_back("./sprites/deborean.png");
+			sf::Vector2f temp(4000,2000);
+			CurrentScene = new PlayScene(temp, "./maps/racetrack2.png", new map("./maps/racetrack2.svg"),carpath);
 			delete this;
 		}
 
