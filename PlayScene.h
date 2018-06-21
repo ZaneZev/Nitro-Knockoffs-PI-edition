@@ -5,6 +5,7 @@
 #include "collisionHandler.h"
 #include <SFML/Audio.hpp>
 #include <vector>
+#include "SocketManager.h"
 #include <string>
 #include <string.h>
 #include <fstream>
@@ -60,15 +61,16 @@ public:
 		laptext->setFont(font);
 		othertext->setFont(font);
 
-		timetext->setCharacterSize(50);
-		laptext->setCharacterSize(50);
-		othertext->setCharacterSize(50);
+		timetext->setCharacterSize(20);
+		laptext->setCharacterSize(20);
+		othertext->setCharacterSize(20);
 
 		bestScoreTime = 1E6; // bad time
 		float server_hs = 1E6;
 
 		try {
-			server_hs = sm.getHighscore();
+			//server_hs = sm.getHighscore();
+            server_hs = 0.0f;
 		}
 		catch (std::exception &e) {
 			// could not read file
@@ -227,7 +229,7 @@ public:
 
 				try {
 					float besttimeever = seconds < bestScoreTime ? seconds : bestScoreTime;
-					sm.sendHighscore(besttimeever);
+					//sm.sendHighscore(besttimeever);
 				}
 				catch (std::exception &e) {
 					cout << "could not send the best time ever to the server" << endl;
@@ -260,10 +262,6 @@ public:
 
 		if (state == COUNTDOWN) {
 
-			timetext->setPosition(view->getCenter() - view->getSize() / 2.f);
-			laptext->setPosition(timetext->getPosition() + sf::Vector2f(200, 0));
-			othertext->setPosition(laptext->getPosition() + sf::Vector2f(200, 0));
-
 			hitHelper->handleCollisions();
 			sf::Vector2f sumPos;
 
@@ -275,6 +273,9 @@ public:
 				sumPos += p->getCar()->getPosition();
 			}
 			view->setCenter(sumPos / (float)players.size());
+            timetext->setPosition(view->getCenter() - view->getSize() / 2.f);
+			laptext->setPosition(timetext->getPosition() + sf::Vector2f(150, 0));
+			othertext->setPosition(laptext->getPosition() + sf::Vector2f(150, 0));
 		}
 
 
@@ -287,10 +288,6 @@ public:
 
 			snprintf(buffer, 7, "Lap %d", lap);
 			laptext->setString(buffer);
-
-			timetext->setPosition(view->getCenter() - view->getSize() / 2.f);
-			laptext->setPosition(timetext->getPosition() + sf::Vector2f(200, 0));
-			othertext->setPosition(laptext->getPosition() + sf::Vector2f(200, 0));
 
 			hitHelper->handleCollisions();
 			sf::Vector2f sumPos;
@@ -317,6 +314,10 @@ public:
 			view->zoom(-deltaL * 0.00099f + 1.f);
 
 			l1 = maxLSq;
+
+            timetext->setPosition(view->getCenter() - view->getSize() / 2.f);
+			laptext->setPosition(timetext->getPosition() + sf::Vector2f(150, 0));
+			othertext->setPosition(laptext->getPosition() + sf::Vector2f(150, 0));
 
 		}
 		else if (state == PAUSE) {
@@ -364,5 +365,5 @@ private:
 	ifstream infile;
 	ofstream outfile;
 
-	SocketManager sm;
+	//SocketManager sm;
 };

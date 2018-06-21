@@ -15,7 +15,7 @@ int main()
 {
 	Game game("Nitro Knockoffs",640,480,30);
 	gameObj = &game;
-	gameObj->setFramerateLimit(32);
+	//gameObj->setFramerateLimit(32);
 	game.start();
 
 	system("pause");
